@@ -77,10 +77,10 @@ d912pxy_noncom::~d912pxy_noncom()
 	if (lkObjTrace == 1)
 	{
 		CloseHandle(gLeakMapLock);
-		for (std::map<UINT, const wchar_t*>::iterator it = gLeakTracker.begin(); it != gLeakTracker.end(); ++it)
-		{
+		// for (std::map<UINT, const wchar_t*>::iterator it = gLeakTracker.begin(); it != gLeakTracker.end(); ++it)
+		// {
 		
-		}		
+		// }		
 	}
 
 #endif
