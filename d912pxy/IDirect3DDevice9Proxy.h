@@ -182,9 +182,6 @@ private:
 
 	D3DPRESENT_PARAMETERS origPP;
 
-	IP7_Trace* log_trace;
-	IP7_Trace::hModule log_module;
-
 	UINT batchCnt;
 
 protected:

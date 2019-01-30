@@ -37,7 +37,7 @@ d912pxy_dheap::d912pxy_dheap(d912pxy_device * dev, D3D12_DESCRIPTOR_HEAP_DESC * 
 
 	slots = desc->NumDescriptors;
 
-	m_log->P7_INFO(LGC_DEFAULT, TM("DHeap %016llX limit: %u"), this, slots);
+	
 
 	size_t alcSize = sizeof(UINT8)*slots;
 
@@ -45,16 +45,11 @@ d912pxy_dheap::d912pxy_dheap(d912pxy_device * dev, D3D12_DESCRIPTOR_HEAP_DESC * 
 	ZeroMemory(slotFlags, alcSize);
 
 	m_desc = desc;
-
-	m_logMetrics = P7_Get_Shared_Telemetry(L"tel_dheap");
-
+	
 	wchar_t buf[255];
 	wsprintf(buf, L"slots / %u", g_HeapIndex);
 	selfIID = g_HeapIndex;
 
-	m_logMetrics->Create(buf, 0, slots, 1, 1, &slotMetrics);
-
-	LOG_DBG_DTDM("type %u cnt %u id %u", desc->Type, slots, g_HeapIndex);
 
 	writeIdx = 0;
 	cleanIdx = 0;
@@ -67,7 +62,6 @@ d912pxy_dheap::d912pxy_dheap(d912pxy_device * dev, D3D12_DESCRIPTOR_HEAP_DESC * 
 
 d912pxy_dheap::~d912pxy_dheap()
 {
-	m_logMetrics->Release();
 	free(slotFlags);
 }
 
@@ -75,7 +69,7 @@ UINT d912pxy_dheap::OccupySlot()
 {		
 	if (!slots)
 	{
-		m_log->P7_ERROR(LGC_DEFAULT, TM("DHeap %u imm limit exceeded"), selfIID);
+		
 		LOG_ERR_THROW2(-1, "dheapslots == 0");
 	}
 
@@ -90,7 +84,6 @@ UINT d912pxy_dheap::OccupySlot()
 			slotFlags[writeIdx] = D912PXY_DHEAP_SLOT_USED;
 			--slots;
 #ifdef FRAME_METRIC_DHEAP
-			m_logMetrics->Add(slotMetrics, slots);
 #endif
 			return writeIdx;
 		}
@@ -138,7 +131,6 @@ void d912pxy_dheap::CleanupSlots(UINT count)
 	}
 
 #ifdef FRAME_METRIC_DHEAP
-	m_logMetrics->Add(slotMetrics, slots);
 #endif
 }
 
@@ -172,7 +164,7 @@ UINT d912pxy_dheap::CreateSRV(ComPtr<ID3D12Resource> resource, D3D12_SHADER_RESO
 		d912pxy_s(DXDev)->CreateShaderResourceView(resource.Get(), NULL, GetDHeapHandle(ret));
 	}
 
-	LOG_DBG_DTDM("new SRV @%u = %u", selfIID, ret);
+
 
 	return ret;
 }
@@ -231,7 +223,7 @@ UINT d912pxy_dheap::CreateRTV(ComPtr<ID3D12Resource> resource, D3D12_RENDER_TARG
 		d912pxy_s(DXDev)->CreateRenderTargetView(resource.Get(), NULL, GetDHeapHandle(ret));
 	}
 
-	LOG_DBG_DTDM("new RTV @%u = %u", selfIID, ret);
+
 
 	return ret;
 }
@@ -251,7 +243,7 @@ UINT d912pxy_dheap::CreateDSV(ComPtr<ID3D12Resource> resource, D3D12_DEPTH_STENC
 		d912pxy_s(DXDev)->CreateDepthStencilView(resource.Get(), NULL, GetDHeapHandle(ret));
 	}
 
-	LOG_DBG_DTDM("new DSV @%u = %u", selfIID, ret);
+
 
 	return ret;
 }
@@ -270,7 +262,7 @@ UINT d912pxy_dheap::CreateSRV_at(ComPtr<ID3D12Resource> resource, D3D12_SHADER_R
 		d912pxy_s(DXDev)->CreateShaderResourceView(resource.Get(), NULL, GetDHeapHandle(ret));
 	}
 
-	LOG_DBG_DTDM("reusing SRV @%u = %u", selfIID, ret);
+
 
 	return ret;
 }

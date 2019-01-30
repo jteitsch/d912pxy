@@ -58,7 +58,7 @@ d912pxy_shader_code d912pxy_shader_replacer::CompileFromHLSL_CS(const wchar_t* b
 
 	if ((compRet != S_OK) && (eret == NULL))
 	{
-		m_log->P7_ERROR(LGC_DEFAULT, TM("shd compiler err = %08lX"), compRet);
+		
 
 		d912pxy_shader_code ret2;
 
@@ -71,7 +71,7 @@ d912pxy_shader_code d912pxy_shader_replacer::CompileFromHLSL_CS(const wchar_t* b
 	}
 	else if (eret != NULL && ret == NULL)
 	{
-		m_log->P7_ERROR(LGC_DEFAULT, TM("shd compile err = %S"), eret->GetBufferPointer());
+		
 
 		d912pxy_shader_code ret2;
 
@@ -85,7 +85,7 @@ d912pxy_shader_code d912pxy_shader_replacer::CompileFromHLSL_CS(const wchar_t* b
 
 		if (eret != NULL)
 		{
-			m_log->P7_WARNING(LGC_DEFAULT, TM("shd compile warning = %S"), eret->GetBufferPointer());
+			
 		}
 
 		d912pxy_shader_code ret2;
@@ -120,7 +120,7 @@ d912pxy_shader_code d912pxy_shader_replacer::CompileFromHLSL(const wchar_t* bfol
 
 	if ((compRet != S_OK) && (eret == NULL))
 	{
-		m_log->P7_ERROR(LGC_DEFAULT, TM("shd compiler err = %08lX"), compRet);
+		
 
 		d912pxy_shader_code ret2;
 
@@ -132,7 +132,7 @@ d912pxy_shader_code d912pxy_shader_replacer::CompileFromHLSL(const wchar_t* bfol
 
 	} else if (eret != NULL && ret == NULL)
 	{
-		m_log->P7_ERROR(LGC_DEFAULT, TM("shd compile err = %S"), eret->GetBufferPointer());
+		
 
 		d912pxy_shader_code ret2;
 
@@ -146,7 +146,7 @@ d912pxy_shader_code d912pxy_shader_replacer::CompileFromHLSL(const wchar_t* bfol
 
 		if (eret != NULL)
 		{
-			m_log->P7_WARNING(LGC_DEFAULT, TM("shd compile warning = %S"), eret->GetBufferPointer());
+			
 		}
 
 		d912pxy_shader_code ret2;
@@ -238,7 +238,7 @@ void d912pxy_shader_replacer::GenerateHLSL(const wchar_t * bfolder)
 		fclose(f);
 	}
 	
-	LOG_DBG_DTDM2("writed %u readed %u test %u", maxVars*16, GetMaxVars(), (maxVars * 16) > (GetMaxVars()));*/
+*/
 
 	delete gen;
 }
@@ -256,11 +256,11 @@ d912pxy_shader_code d912pxy_shader_replacer::GetCode()
 			ret = CompileFromHLSL(d912pxy_shader_db_hlsl_dir);
 			if (!ret.code)
 			{
-				m_log->P7_ERROR(LGC_DEFAULT, TM("Failed to replace shader with UID = %016llX"), mUID);
-				m_log->P7_ERROR(LGC_DEFAULT, TM("bytecode dump: "));
+				
+				
 				for (UINT i = 0; i != oLen; ++i)
 				{
-					m_log->P7_ERROR(LGC_DEFAULT, TM("%04u : %08lX"), i, oCode[i]);
+					
 				}
 				LOG_ERR_THROW2(-1, "shader replace error");
 			}

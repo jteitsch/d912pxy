@@ -56,7 +56,7 @@ void d912pxy_ringbuffer<ElementType>::WriteElement(ElementType ele)
 			UINT oldMemSize = sizeof(ElementType)*maxElements; 
 			UINT addMemSize = sizeof(ElementType)*expandElements;			
 
-			LOG_DBG_DTDM("growing ringbuffer by %u elements", expandElements);
+		
 			
 			writePoint -= bufferData;
 			readPoint -= bufferData;

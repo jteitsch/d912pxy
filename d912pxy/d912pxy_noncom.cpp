@@ -40,15 +40,13 @@ HANDLE gLeakMapLock;
 
 d912pxy_noncom::d912pxy_noncom(d912pxy_device * dev, const wchar_t * logModule)
 {
-	m_log = d912pxy_helper::GetLogger();
+	
 
-	m_log->Register_Module(logModule, &LGC_DEFAULT);
 
-	LOG_DBG_DTDM("new %s", logModule);
 
 #ifdef _DEBUG
 	++g_ObjectsCounter;
-	LOG_DBG_DTDM("obj %u is %s", g_ObjectsCounter, logModule);
+
 
 #ifdef DEBUG_LEAKOBJ
 	if (g_ObjectsCounter == 1)
@@ -70,7 +68,7 @@ d912pxy_noncom::~d912pxy_noncom()
 	--g_ObjectsCounter;
 
 #ifdef DEBUG_LEAKOBJ
-	LOG_DBG_DTDM("Objs last = %u", g_ObjectsCounter);
+
 
 	WaitForSingleObject(gLeakMapLock, INFINITE);
 	gLeakTracker.erase(lkObjTrace);
@@ -81,14 +79,14 @@ d912pxy_noncom::~d912pxy_noncom()
 		CloseHandle(gLeakMapLock);
 		for (std::map<UINT, const wchar_t*>::iterator it = gLeakTracker.begin(); it != gLeakTracker.end(); ++it)
 		{
-			LOG_DBG_DTDM3("obj %s is leaked", it->second);
+		
 		}		
 	}
 
 #endif
 	if (g_ObjectsCounter == 0)
 	{
-		LOG_DBG_DTDM3("all d912pxy objects are freed. Freedom!");
+	
 	}
 #endif
 }
@@ -98,7 +96,7 @@ void d912pxy_noncom::ThrowErrorDbg(HRESULT hr, const char * msg)
 	if (!FAILED(hr))
 		return;
 
-	m_log->P7_ERROR(LGC_DEFAULT, TM("throw on %S with HR = 0x%lX"), msg, hr);
+	
 
 	//P7_Exceptional_Flush();
 			
@@ -107,7 +105,7 @@ void d912pxy_noncom::ThrowErrorDbg(HRESULT hr, const char * msg)
 
 HRESULT d912pxy_noncom::GetDevice(IDirect3DDevice9 ** ppDevice)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	*ppDevice = m_dev;
 	return D3D_OK;
 }

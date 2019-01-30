@@ -32,16 +32,8 @@ SOFTWARE.
 
 IDirect3DDevice9Proxy::IDirect3DDevice9Proxy(IDirect3DDevice9Proxy* chain) 
 {
-	IP7_Client *l_pClient = P7_Get_Shared(TM("logger"));
-
 	wchar_t buf[1024];
 	wsprintf(buf, L"d3d9dev proxy cn %08lX %08lX", ((intptr_t)this) >> 32, (intptr_t)this & 0xFFFFFFFF);
-
-	log_trace = P7_Create_Trace(l_pClient, buf);	
-	l_pClient->Release();
-	log_trace->Register_Module(L"pass", &log_module);
-
-	log_trace->P7_DEBUG(log_module, TM("chained oobj %016llX odev %016llX"), chain->origID3D9, chain->origIDirect3DDevice9);
 
 	origID3D9 = chain->origID3D9;
 	origIDirect3DDevice9 = chain->origIDirect3DDevice9;
@@ -58,20 +50,8 @@ IDirect3DDevice9Proxy::IDirect3DDevice9Proxy(IDirect3DDevice9Proxy* chain)
 
 IDirect3DDevice9Proxy::IDirect3DDevice9Proxy(IDirect3D9* pOriginal, Direct3DDevice9Proxy_create_params cp)
 {
-	IP7_Client *l_pClient = P7_Get_Shared(TM("logger"));
-
 	wchar_t buf[1024];
 	wsprintf(buf, L"d3d9dev proxy cn %08lX %08lX", ((intptr_t)this) >> 32, (intptr_t)this & 0xFFFFFFFF);
-
-	log_trace = P7_Create_Trace(l_pClient, buf);
-	l_pClient->Release();
-	log_trace->Register_Module(L"pass", &log_module);
-	
-	log_trace->P7_DEBUG(log_module, TM("clear oobj %016llX"), pOriginal);
-
-	log_trace->P7_DEBUG(log_module, TM("ocp a %u bf %u dt %u hfw %u"), cp.Adapter, cp.BehaviorFlags, cp.DeviceType, cp.hFocusWindow);
-	//log_trace->P7_DEBUG(log_module, TM("ocp pp a %u bf %u dt %u hfw %u"), cp.pPresentationParameters->);
-
 
 	origIDirect3DDevice9 = 0;
 	origID3D9 = pOriginal;
@@ -86,7 +66,6 @@ IDirect3DDevice9Proxy::IDirect3DDevice9Proxy(IDirect3D9* pOriginal, Direct3DDevi
 }
 
 IDirect3DDevice9Proxy::~IDirect3DDevice9Proxy(void){
-	log_trace->P7_DEBUG(log_module, TM("freed"));
 
 #ifdef PERFORMANCE_GRAPH_WRITE
 	delete perfGraph;
@@ -676,7 +655,7 @@ HRESULT IDirect3DDevice9Proxy::PostInit(IDirect3DDevice9** realDev)
 
 	*realDev = origIDirect3DDevice9;
 
-	log_trace->P7_DEBUG(log_module, TM("odev %016llX"), origIDirect3DDevice9);
+
 
 	return ret;
 }

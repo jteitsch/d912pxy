@@ -44,7 +44,7 @@ d912pxy_vstream_pool::~d912pxy_vstream_pool()
 			++tsz;
 		}
 
-		LOG_DBG_DTDM3("vs pool tbl[%u] = %u", i, tsz);
+		
 
 		delete memTable[i];
 	}
@@ -55,7 +55,7 @@ d912pxy_vstream * d912pxy_vstream_pool::GetVStreamObject(UINT size, UINT fmt, UI
 	d912pxy_vstream* ret = NULL;
 	UINT mc = MemCatFromSize(size);
 
-	LOG_DBG_DTDM2("mc %02X sz %08lX szc %08lX", mc, size, MemCatFromSize(MemCatToSize(mc)));
+
 
 	PoolRW(mc, &ret, 0);
 

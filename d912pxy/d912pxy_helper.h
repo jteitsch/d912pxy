@@ -51,8 +51,6 @@ namespace d912pxy_helper {
 
 	ComPtr<IDXGISwapChain4> CreateSwapChain(HWND hWnd, ComPtr<ID3D12CommandQueue> commandQueue, uint32_t width, uint32_t height, uint32_t bufferCount, BOOL fullscreen);
 
-	IP7_Trace* GetLogger();
-
 	DXGI_FORMAT DXGIFormatFromDX9FMT(D3DFORMAT fmt);
 	UINT8 BitsPerPixel(DXGI_FORMAT fmt);
 

@@ -33,9 +33,6 @@ SOFTWARE.
 using namespace Microsoft::WRL;
 using namespace d912pxy_helper;
 
-IP7_Trace* m_log = NULL;
-IP7_Trace::hModule m_helperLGM;
-
 UINT s_crashLine = 0;
 
 D3D_FEATURE_LEVEL usingFeatures = D3D_FEATURE_LEVEL_11_0;
@@ -193,24 +190,6 @@ ComPtr<ID3D12CommandQueue> d912pxy_helper::CreateCommandQueue(ComPtr<ID3D12Devic
 	return d3d12CommandQueue;
 }
 
-IP7_Trace* d912pxy_helper::GetLogger()
-{
-	//create P7 trace object 1
-
-	if (m_log == NULL)
-	{
-		IP7_Client *l_pClient = P7_Get_Shared(TM("logger"));
-		m_log = P7_Create_Trace(l_pClient, TM("d912pxy"));
-		m_log->Register_Thread(TM("main thread"), 0);
-
-		m_log->Register_Module(L"helper", &m_helperLGM);
-
-		l_pClient->Release();		
-	}
-
-	return m_log;
-}
-
 bool d912pxy_helper::CheckTearingSupport()
 {
 	BOOL allowTearing = FALSE;
@@ -335,7 +314,7 @@ DXGI_FORMAT d912pxy_helper::DXGIFormatFromDX9FMT(D3DFORMAT fmt)
 		case D3DFMT_NULL: return DXGI_FORMAT_UNKNOWN; break;//megai2: ignore it
 		default: 
 		{
-			GetLogger()->P7_ERROR(m_helperLGM, L"D3D9 fmt to DXGI fmt not matched for %u", fmt);
+			
 			return DXGI_FORMAT_UNKNOWN;
 		}
 	}

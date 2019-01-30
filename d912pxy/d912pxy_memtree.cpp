@@ -50,7 +50,7 @@ d912pxy_memtree::~d912pxy_memtree()
 #ifdef CAPTURE_JMP_MAP
 	if (!jmpMap)
 	{
-		LOG_DBG_DTDM("memtree jmp map");
+	
 		wchar_t buf[4096];
 
 		int jmpA = 0;
@@ -67,10 +67,10 @@ d912pxy_memtree::~d912pxy_memtree()
 			else
 				++jmpA;
 
-			//LOG_DBG_DTDM("dt[%u] = %u", i, memDiffCnt[i]);
+			//
 		}
 
-		LOG_DBG_DTDM("jmp map = %s, + %u", buf, jmpA);
+	
 	}
 #endif
 }

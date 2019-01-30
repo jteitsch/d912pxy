@@ -174,7 +174,7 @@ d912pxy_hlsl_generator::d912pxy_hlsl_generator(DWORD * src, UINT len, wchar_t * 
 
 	LoadBugDefs();
 
-	LOG_DBG_DTDM("generating hlsl file %s", ofn);
+
 
 	of = _wfopen(ofn, L"wb");
 
@@ -400,7 +400,7 @@ void d912pxy_hlsl_generator::Process()
 	else if (majVer == 1) 
 		sioTableOffset = d912pxy_hlsl_generator_op_handler_group_size * d912pxy_hlsl_generator_op_handler_1_x;
 	else {
-		m_log->P7_ERROR(LGC_DEFAULT, TM("hlsl generator not support %u_%u shader model"), majVer, minVer);
+		
 		LOG_ERR_THROW2(-1, "hlsl generator not support shader model specified");
 	}
 
@@ -625,7 +625,7 @@ d912pxy_hlsl_generator_regtext d912pxy_hlsl_generator::FormatSrcRegister(DWORD* 
 			);
 			break;
 		default:
-			m_log->P7_ERROR(LGC_DEFAULT, TM("hlsl generator not support %08lX src modifier"), GetSrcMod(reg));
+			
 			LOG_ERR_THROW2(-1, "hlsl generator not support passed src modifier");
 			break;
 		}
@@ -663,7 +663,7 @@ d912pxy_hlsl_generator_regtext d912pxy_hlsl_generator::FormatSrcRegister(DWORD* 
 			);
 			break;
 		default:
-			m_log->P7_ERROR(LGC_DEFAULT, TM("hlsl generator not support %08lX src modifier"), GetSrcMod(reg));
+			
 			LOG_ERR_THROW2(-1, "hlsl generator not support passed src modifier");
 			break;
 		}
@@ -700,7 +700,7 @@ d912pxy_hlsl_generator_regtext d912pxy_hlsl_generator::FormatDstModifier(d912pxy
 			sprintf(ret.t, "saturate((half)(%s))", statement.t);
 		break;
 	default:
-		m_log->P7_ERROR(LGC_DEFAULT, TM("hlsl generator not support %08lX dst mod"), (dstOp >> 20) & 0xF);
+		
 		LOG_ERR_THROW2(-1, "hlsl generator not support passed dst modifier");
 	}
 	return ret;
@@ -724,7 +724,7 @@ d912pxy_hlsl_generator_regtext d912pxy_hlsl_generator::FormatDstModifierForSrc(d
 			sprintf(ret.t, "((half)(%s))", statement.t);
 		break;	
 	default:
-		m_log->P7_ERROR(LGC_DEFAULT, TM("hlsl generator not support %08lX dst mod"), (dstOp >> 20) & 0xF);
+		
 		LOG_ERR_THROW2(-1, "hlsl generator not support passed dst modifier");
 	}
 	return ret;
@@ -1202,7 +1202,7 @@ void d912pxy_hlsl_generator::CheckRegDefinition(DWORD op, UINT isDst)
 						}
 						break;
 						default:
-							m_log->P7_ERROR(LGC_DEFAULT, TM("hlsl generator not support %08lX dst mod"), GetDstModifier(op));
+							
 							LOG_ERR_THROW2(-1, "hlsl generator not support passed dst modifier");						
 					}
 				}
@@ -1262,7 +1262,7 @@ void d912pxy_hlsl_generator::LoadBugDefs()
 				genVSClipplane0 = 1;
 				break;
 			default:
-				m_log->P7_WARNING(LGC_DEFAULT, TM("found unindentified bug %u for %016llX. SKIP!"), i, mUID);
+				
 				break;
 			}
 		}
@@ -1351,7 +1351,7 @@ void d912pxy_hlsl_generator::ProcSIO_DEF(DWORD * op)
 	UINT wm = GetWriteMask(op[1]);
 	UINT num = GetRegNumber(op[1]);
 
-	LOG_DBG_DTDM("def regt = %u wm = %X num = %u", reg, wm, num);
+
 	
 	if (wm != 0xF)
 		LOG_ERR_THROW2(-1, "hlsl gen stuck");
@@ -1410,7 +1410,7 @@ void d912pxy_hlsl_generator::ProcSIO_DCL(DWORD * op)
 	UINT dstReg = GetRegType(op[2]);
 	UINT regNum = GetRegNumber(op[2]);
 	
-	LOG_DBG_DTDM("DCL of %S%u", d912pxy_hlsl_generator_reg_names[dstReg], regNum);
+
 
 	DefineIOReg(op[2]);
 	
@@ -1531,7 +1531,7 @@ void d912pxy_hlsl_generator::ProcSIO_DCL(DWORD * op)
 				}
 				break;
 				default:
-					m_log->P7_ERROR(LGC_DEFAULT, TM("hlsl gen dcl ps_3 reg type is %u"), dstReg);
+					
 					LOG_ERR_THROW2(-1, "hlsl reg type");
 					break;
 			}
@@ -2120,12 +2120,12 @@ void d912pxy_hlsl_generator::ProcSIO_SINCOS(DWORD * op)
 void d912pxy_hlsl_generator::ProcSIO_UNK(DWORD * op)
 {
 	UINT ilen = (op[0] >> 24) & 0xF;
-	LOG_DBG_DTDM("unknown opcode %u length %u", op[0] & 0xFFFF, ilen);
+
 	HLSL_GEN_WRITE_PROC("error //UNK OP %u length %u", op[0] & 0xFFFF, ilen);
 
 	for (int i = 1; i != ilen+1; ++i)
 	{
-		LOG_DBG_DTDM("op par %u = %08lX", i - 1, op[i]);
+	
 		HLSL_GEN_WRITE_PROC("error //op par %u = %08lX", i - 1, op[i]);
 	}
 	

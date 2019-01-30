@@ -213,10 +213,6 @@ UINT d912pxy_sampler_cache::CreateNewSampler(D3D12_SAMPLER_DESC* cDsc)
 	UINT ret;
 
 	{
-		LOG_DBG_DTDM("new sampler f %08lX lmi %.2f lma %.2f lbi %.2f U %u V %u W %u A %u B0 %.3f B1 %.3f B2 %.3f B3 %.3f",
-			cDsc->Filter, cDsc->MinLOD, cDsc->MaxLOD, cDsc->MipLODBias, cDsc->AddressU, cDsc->AddressV, cDsc->AddressW, cDsc->MaxAnisotropy,
-			cDsc->BorderColor[0], cDsc->BorderColor[1], cDsc->BorderColor[2], cDsc->BorderColor[3]);
-
 		//megai2: handle filter type for real
 
 		DWORD dx9FilterName = cDsc->Filter;

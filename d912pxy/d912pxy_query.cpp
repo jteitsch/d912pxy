@@ -55,21 +55,21 @@ D912PXY_METHOD_IMPL_(D3DQUERYTYPE, GetType)(THIS)
 
 D912PXY_METHOD_IMPL_(DWORD, GetDataSize)(THIS)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	return 4;
 }
 
 D912PXY_METHOD_IMPL(Issue)(THIS_ DWORD dwIssueFlags)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	return D3D_OK;
 }
 
 D912PXY_METHOD_IMPL(GetData)(THIS_ void* pData, DWORD dwSize, DWORD dwGetDataFlags)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	return S_OK;
 }

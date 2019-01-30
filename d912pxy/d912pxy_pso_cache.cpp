@@ -129,7 +129,7 @@ void d912pxy_pso_cache::State(D3DRENDERSTATETYPE State, DWORD Value)
 			cDsc.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;
 		else {
 			cDsc.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;
-			LOG_DBG_DTDM("RS fillmode point unimpl");
+		
 		}
 		break; //8,    /* D3DFILLMODE */
 
@@ -250,7 +250,7 @@ void d912pxy_pso_cache::State(D3DRENDERSTATETYPE State, DWORD Value)
 		break; //176,
 
 	case D3DRS_TWOSIDEDSTENCILMODE:
-		LOG_DBG_DTDM("RS twosided stencil %u / %u", cDsc.DepthStencilState.StencilEnable, Value);//megai2: default stencil uses 2 sides in dx12. tricky!
+	//megai2: default stencil uses 2 sides in dx12. tricky!
 		break; //185,   /* BOOL enable/disable 2 sided stenciling */
 
 	case D3DRS_CCW_STENCILFAIL:
@@ -285,7 +285,7 @@ void d912pxy_pso_cache::State(D3DRENDERSTATETYPE State, DWORD Value)
 	}
 
 	case D3DRS_SEPARATEALPHABLENDENABLE:
-		//LOG_DBG_DTDM("RS sep ablend %u / %u", cDsc.BlendState.RenderTarget[0].BlendEnable, Value); //megai2: same as with stencil. only one bool for blends, not twho. tricky!
+		// //megai2: same as with stencil. only one bool for blends, not twho. tricky!
 		break; //206,  /* TRUE to enable a separate blending function for the alpha channel */
 
 	case D3DRS_SRCBLENDALPHA:
@@ -330,7 +330,7 @@ void d912pxy_pso_cache::VShader(d912pxy_vshader * vs)
 {
 #ifdef _DEBUG
 	if (vs)
-		LOG_DBG_DTDM("vs = %016llX", vs->GetID());
+	
 #endif
 
 	dirty |= 1;
@@ -342,7 +342,7 @@ void d912pxy_pso_cache::PShader(d912pxy_pshader * ps)
 {
 #ifdef _DEBUG
 	if (ps)
-		LOG_DBG_DTDM("ps = %016llX", ps->GetID());
+	
 #endif
 
 	dirty |= 1;
@@ -523,7 +523,7 @@ void d912pxy_pso_cache_item::Compile()
 		d912pxy_pso_cache::cDscBase.PS = *psObj->GetCode();
 	}
 	catch (...) {
-		m_log->P7_ERROR(LGC_DEFAULT, TM("final error compiling shader pair VS %016llX PS %016llX"), vsObj->GetID(), psObj->GetID());
+		
 
 		vsObj->ThreadRef(-1);
 		psObj->ThreadRef(-1);
@@ -544,7 +544,7 @@ void d912pxy_pso_cache_item::Compile()
 	d912pxy_pso_cache::cDscBase.RTVFormats[0] = desc->RTVFormat0;
 	d912pxy_pso_cache::cDscBase.DSVFormat = desc->DSVFormat;
 
-	LOG_DBG_DTDM("Compiling PSO with vs = %016llX , ps = %016llX", vsObj->GetID(), psObj->GetID());
+
 
 	/*d912pxy_shader_uid shaderBlacklist[] = {
 		0xF080FCE66894DD82,
@@ -575,7 +575,7 @@ void d912pxy_pso_cache_item::Compile()
 		}
 		catch (...)
 		{
-			m_log->P7_ERROR(LGC_DEFAULT, TM("CreateGraphicsPipelineState error for VS %016llX PS %016llX"), vsObj->GetID(), psObj->GetID());
+			
 
 			char dumpString[sizeof(d912pxy_trimmed_dx12_pso)*2 + 1];
 			dumpString[0] = 0;
@@ -590,7 +590,7 @@ void d912pxy_pso_cache_item::Compile()
 
 			dumpString[sizeof(d912pxy_trimmed_dx12_pso) * 2] = 0;
 
-			m_log->P7_ERROR(LGC_DEFAULT, TM("trimmed pso dump %S"), dumpString);
+			
 
 			vsObj->ThreadRef(-1);
 			psObj->ThreadRef(-1);

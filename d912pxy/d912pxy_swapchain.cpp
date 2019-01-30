@@ -25,8 +25,6 @@ SOFTWARE.
 #include "stdafx.h"
 #include "d912pxy_swapchain.h"
 
-#define LOG_DBG_DEV(fmt, ...) m_log->P7_DEBUG(LGC_SWPCHA, TM(fmt), __VA_ARGS__)
-
 d912pxy_swapchain::d912pxy_swapchain(d912pxy_device* dev, int index, HWND hWnd, ComPtr<ID3D12CommandQueue> commandQueue, uint32_t width, uint32_t height, uint32_t bufferCount_div2, BOOL Fullscreen, UINT i_vSync):
 	d912pxy_comhandler(L"swap chain")
 {
@@ -50,7 +48,7 @@ d912pxy_swapchain::d912pxy_swapchain(d912pxy_device* dev, int index, HWND hWnd, 
 
 	m_d12swp = d912pxy_helper::CreateSwapChain(hWnd, commandQueue, m_width, m_height, totalBackBuffers, Fullscreen);
 
-	m_log->P7_INFO(LGC_DEFAULT, TM("wnd %llX w %u h %u c %u"), m_hwnd, m_width, m_height, totalBackBuffers);
+	
 
 	if (m_d12swp)
 	{
@@ -65,7 +63,7 @@ d912pxy_swapchain::d912pxy_swapchain(d912pxy_device* dev, int index, HWND hWnd, 
 	}
 	else {
 				
-		m_log->P7_ERROR(LGC_DEFAULT, TM("swapchain for wnd %llX w %u h %u c %u failed, but faking that's this is ok"), hWnd, width, height, bufferCount);
+		
 
 		for (int i = 0; i != bufferCount; ++i)
 		{
@@ -90,7 +88,7 @@ d912pxy_swapchain::d912pxy_swapchain(d912pxy_device* dev, int index, HWND hWnd, 
 
 d912pxy_swapchain::~d912pxy_swapchain()
 {
-	m_log->P7_INFO(LGC_DEFAULT, TM("Stopping swapchain"));
+	
 
 	m_d12swp->SetFullscreenState(0, NULL);
 
@@ -125,14 +123,14 @@ HRESULT d912pxy_swapchain::Present(CONST RECT * pSourceRect, CONST RECT * pDestR
 
 HRESULT d912pxy_swapchain::GetFrontBufferData(IDirect3DSurface9 * pDestSurface)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	return E_NOTIMPL;
 }
 
 HRESULT d912pxy_swapchain::GetBackBuffer(UINT iBackBuffer, D3DBACKBUFFER_TYPE Type, IDirect3DSurface9 ** ppBackBuffer)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	
 	//iBackBuffer represents a index of pair buffers?
 
@@ -147,14 +145,14 @@ HRESULT d912pxy_swapchain::GetBackBuffer(UINT iBackBuffer, D3DBACKBUFFER_TYPE Ty
 
 HRESULT d912pxy_swapchain::GetRasterStatus(D3DRASTER_STATUS * pRasterStatus)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	return E_NOTIMPL;
 }
 
 HRESULT d912pxy_swapchain::GetDisplayMode(D3DDISPLAYMODE * pMode)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	return E_NOTIMPL;
 }
@@ -168,7 +166,7 @@ HRESULT d912pxy_swapchain::GetDevice(IDirect3DDevice9 ** ppDevice)
 
 HRESULT d912pxy_swapchain::GetPresentParameters(D3DPRESENT_PARAMETERS * pPresentationParameters)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	return E_NOTIMPL;
 }
@@ -220,7 +218,7 @@ d912pxy_surface * d912pxy_swapchain::GetRTBackBuffer()
 
 void d912pxy_swapchain::Resize(UINT width, UINT height, UINT fullscreen, UINT newVSync)
 {	
-	m_log->P7_INFO(LGC_DEFAULT, TM("swapchain resize width %u height %u"), width, height);
+	
 
 	vSync = newVSync;
 
@@ -241,7 +239,7 @@ void d912pxy_swapchain::Resize(UINT width, UINT height, UINT fullscreen, UINT ne
 
 	m_d12swp = d912pxy_helper::CreateSwapChain(m_hwnd, d912pxy_s(GPUque)->GetDXQue(), m_width, m_height, totalBackBuffers, fullscreen);
 
-	m_log->P7_INFO(LGC_DEFAULT, TM("wnd %llX w %u h %u c %u"), m_hwnd, m_width, m_height, totalBackBuffers);
+	
 
 	if (m_d12swp)
 	{

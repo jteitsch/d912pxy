@@ -59,7 +59,7 @@ d912pxy_memtree2::~d912pxy_memtree2()
 #ifdef CAPTURE_JMP_MAP
 	if (!jmpMap)
 	{
-		LOG_DBG_DTDM("memtree jmp map");
+	
 		wchar_t buf[4096];
 
 		int jmpA = 0;
@@ -76,10 +76,10 @@ d912pxy_memtree2::~d912pxy_memtree2()
 			else
 				++jmpA;
 
-			//LOG_DBG_DTDM("dt[%u] = %u", i, memDiffCnt[i]);
+			//
 		}
 
-		LOG_DBG_DTDM("jmp map = %s, + %u", buf, jmpA);
+	
 	}
 #endif
 
@@ -150,7 +150,7 @@ UINT64 d912pxy_memtree2::PointAt2(void * mem)
 				memDiffData[depth] = ci;
 			}
 			else {
-				;// LOG_DBG_DTDM("ok");
+				;//
 			}
 		}
 #endif
@@ -165,7 +165,7 @@ UINT64 d912pxy_memtree2::PointAt2(void * mem)
 
 			if (newNode >= maxNodes)
 			{
-				LOG_DBG_DTDM3("growing memtree %u => %u", maxNodes, maxNodes * grow);
+			
 				if (grow > 1)
 				{
 					maxNodes *= grow;

@@ -135,22 +135,6 @@ SOFTWARE.
 //#define ENABLE_DEBUG_LOGGING
 #endif
 
-#ifdef ENABLE_DEBUG_LOGGING
-#ifdef _DEBUG
-#define LOG_DBG_DTDM(fmt, ...) ;//(m_log->P7_DEBUG(LGC_DEFAULT, TM(fmt), __VA_ARGS__))
-#define LOG_DBG_DTDM2(fmt, ...) ;//(m_log->P7_DEBUG(LGC_DEFAULT, TM(fmt), __VA_ARGS__))
-#define LOG_DBG_DTDM3(fmt, ...) (m_log->P7_DEBUG(LGC_DEFAULT, TM(fmt), __VA_ARGS__))
-#else 
-#define LOG_DBG_DTDM(fmt, ...) (m_log->P7_DEBUG(LGC_DEFAULT, TM(fmt), __VA_ARGS__))
-#define LOG_DBG_DTDM2(fmt, ...) (m_log->P7_DEBUG(LGC_DEFAULT, TM(fmt), __VA_ARGS__))
-#define LOG_DBG_DTDM3(fmt, ...) (m_log->P7_DEBUG(LGC_DEFAULT, TM(fmt), __VA_ARGS__))
-#endif
-#else
-#define LOG_DBG_DTDM(fmt, ...) ;
-#define LOG_DBG_DTDM2(fmt, ...) ;
-#define LOG_DBG_DTDM3(fmt, ...) ;
-#endif
-
 //#define TRACK_SHADER_BUGS_PROFILE
 
 #define LOG_ERR_THROW(hr) LOG_ERR_THROW2(hr, hr)

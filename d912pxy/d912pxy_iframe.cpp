@@ -189,7 +189,7 @@ void d912pxy_iframe::CommitBatch(D3DPRIMITIVETYPE PrimitiveType, INT BaseVertexI
 
 	if (batchesIssued >= (PXY_INNER_MAX_IFRAME_BATCH_COUNT - 1))
 	{
-		m_log->P7_ERROR(LGC_DEFAULT, L"batches in one frame exceeded PXY_INNER_MAX_IFRAME_BATCH_COUNT, performing queued commands now");
+		
 
 		if (indexBind)
 			indexBind->GetBase()->ThreadRef(1);
@@ -464,7 +464,7 @@ void d912pxy_iframe::InstancedVDecl(d912pxy_vdecl * src)
 
 void d912pxy_iframe::Start()
 {
-	LOG_DBG_DTDM2("Start Frame %u", mCurrentFrameIndex);
+
 
 	for (int i = 0; i != PXY_INNER_MAX_DSC_HEAPS; ++i)
 		mHeaps[i]->CleanupSlots(PXY_INNER_MAX_DHEAP_CLEANUP_PER_SYNC);
@@ -505,7 +505,7 @@ void d912pxy_iframe::End()
 	if (mSwapChain)
 		mSwapChain->EndFrame();
 
-	LOG_DBG_DTDM2("End Frame %u", mCurrentFrameIndex);
+
 	++mCurrentFrameIndex;
 	
 }

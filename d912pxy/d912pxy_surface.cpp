@@ -44,7 +44,7 @@ d912pxy_surface::d912pxy_surface(d912pxy_device* dev, UINT Width, UINT Height, D
 	lockDiscard = Lockable;
 
 	m_fmt = d912pxy_helper::DXGIFormatFromDX9FMT(Format);
-	LOG_DBG_DTDM("fmt %u => %u", Format, m_fmt);
+
 
 	srvHeapIdx = 0xFFFFFFFF;
 
@@ -53,7 +53,7 @@ d912pxy_surface::d912pxy_surface(d912pxy_device* dev, UINT Width, UINT Height, D
 		subresFootprints = (D3D12_PLACED_SUBRESOURCE_FOOTPRINT*)malloc(sizeof(D3D12_PLACED_SUBRESOURCE_FOOTPRINT)*1);
 		subresSizes = (size_t*)malloc(sizeof(size_t)*1);
 
-		LOG_DBG_DTDM("w %u h %u u %u FCC NULL", surf_dx9dsc.Width, surf_dx9dsc.Height, surf_dx9dsc.Usage);
+	
 		return;
 	}
 
@@ -85,7 +85,7 @@ d912pxy_surface::d912pxy_surface(d912pxy_device* dev, UINT Width, UINT Height, D
 		dheapId = dHeap->CreateDSV(m_res, &dsc2);
 	}
 
-	LOG_DBG_DTDM("w %u h %u u %u", surf_dx9dsc.Width, surf_dx9dsc.Height, surf_dx9dsc.Usage);
+
 }
 
 d912pxy_surface::d912pxy_surface(d912pxy_device* dev, UINT Width, UINT Height, D3DFORMAT Format, DWORD Usage, UINT* levels, UINT arrSz) : d912pxy_resource(dev, RTID_SURFACE, L"surface texture")
@@ -103,7 +103,7 @@ d912pxy_surface::d912pxy_surface(d912pxy_device* dev, UINT Width, UINT Height, D
 	lockDiscard = 1;
 
 	m_fmt = d912pxy_helper::DXGIFormatFromDX9FMT(Format);
-	LOG_DBG_DTDM("fmt %u => %u", Format, m_fmt);
+
 
 	d12res_tex2d(Width, Height, m_fmt, (UINT16*)levels, arrSz);
 
@@ -175,12 +175,12 @@ d912pxy_surface::d912pxy_surface(d912pxy_device* dev, UINT Width, UINT Height, D
 	backBuffer = 0;
 	srvHeapIdx = 0xFFFFFFFF;
 
-	LOG_DBG_DTDM("w %u h %u u %u ls %u", surf_dx9dsc.Width, surf_dx9dsc.Height, surf_dx9dsc.Usage, *levels);
+
 }
 
 d912pxy_surface::d912pxy_surface(d912pxy_device* dev, ComPtr<ID3D12Resource> fromResource, D3D12_RESOURCE_STATES inState, d912pxy_swapchain* isBackBuffer): d912pxy_resource(dev, RTID_SURFACE, L"surface bb")
 {	
-	LOG_DBG_DTDM("from dx12res = %016llX", fromResource.Get());
+
 
 	backBuffer = isBackBuffer;
 
@@ -222,12 +222,12 @@ d912pxy_surface::d912pxy_surface(d912pxy_device* dev, ComPtr<ID3D12Resource> fro
 
 	srvHeapIdx = 0xFFFFFFFF;
 
-	LOG_DBG_DTDM("w %u h %u u %u", surf_dx9dsc.Width, surf_dx9dsc.Height, surf_dx9dsc.Usage);
+
 }
 
 d912pxy_surface::~d912pxy_surface()
 {
-	LOG_DBG_DTDM("freeing d3d12 resource %016llX", m_res.Get());
+
 
 	if (dHeap)
 		dHeap->FreeSlot(dheapId);
@@ -249,7 +249,7 @@ d912pxy_surface::~d912pxy_surface()
 
 	if (srvHeapIdx != 0xFFFFFFFF)
 	{
-		LOG_DBG_DTDM2("rt/dsv srv freeing %u", srvHeapIdx);
+	
 		m_dev->GetDHeap(PXY_INNER_HEAP_SRV)->FreeSlot(srvHeapIdx);
 	}
 }
@@ -271,13 +271,13 @@ D912PXY_METHOD_IMPL_(D3DRESOURCETYPE, GetType)(THIS) { return d912pxy_resource::
 //surface methods
 D912PXY_METHOD_IMPL(GetContainer)(THIS_ REFIID riid, void** ppContainer)
 { 
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return D3DERR_INVALIDCALL; 
 }
 
 D912PXY_METHOD_IMPL(GetDesc)(THIS_ D3DSURFACE_DESC *pDesc)
 { 
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	*pDesc = surf_dx9dsc;
 	return D3D_OK; 
@@ -290,20 +290,20 @@ D912PXY_METHOD_IMPL(LockRect)(THIS_ D3DLOCKED_RECT* pLockedRect, CONST RECT* pRe
 
 D912PXY_METHOD_IMPL(UnlockRect)(THIS)
 { 
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	return D3D_OK; 
 }
 
 D912PXY_METHOD_IMPL(GetDC)(THIS_ HDC *phdc)
 { 
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return D3DERR_INVALIDCALL; 
 }
 
 D912PXY_METHOD_IMPL(ReleaseDC)(THIS_ HDC hdc)
 { 
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return D3D_OK; 
 }
 
@@ -357,12 +357,12 @@ void d912pxy_surface::initInternalBuf()
 
 	//surfMemRef = malloc(surfMemSz);
 
-//	LOG_DBG_DTDM("ibuf perPix %u, sz %u", mem_perPixel, surfMemSz);
+//
 }
 
 size_t d912pxy_surface::GetFootprintMemSz()
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	size_t retSum = 0;
 
@@ -745,7 +745,7 @@ void d912pxy_surface::UploadSurfaceData(d912pxy_upload_item* ul, UINT lv)
 	d912pxy_s(DXDev)->GetCopyableFootprints(&m_res->GetDesc(), lv, 1, offsetToSubres.Begin, &srcR.PlacedFootprint, 0, 0, &activeSize);
 
 
-	LOG_DBG_DTDM("aSz %llu pfo %llu pfW %u pfH %u pdD %u", activeSize, srcR.PlacedFootprint.Offset, srcR.PlacedFootprint.Footprint.Width, srcR.PlacedFootprint.Footprint.Height, srcR.PlacedFootprint.Footprint.Depth);
+
 
 	dstR.SubresourceIndex = lv;
 	dstR.pResource = m_res.Get();

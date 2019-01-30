@@ -48,13 +48,6 @@ d912pxy_gpu_cmd_list::d912pxy_gpu_cmd_list(d912pxy_device * dev, ComPtr<ID3D12Co
 	mGpuRefs = new d912pxy_ringbuffer<d912pxy_comhandler*>(iMaxRefernecedObjs, iGrowReferences);
 	mGpuRefsCleanupDepth = iMaxCleanupPerSync;
 
-	m_logMetrics = P7_Get_Shared_Telemetry(L"iframe_stats");
-
-	wchar_t buf[255];
-	wsprintf(buf, L"gpu cmd refs / %X", this);
-	
-	m_logMetrics->Create(buf, 0, 7000, iMaxRefernecedObjs, 1, &m_cleanupCntMetrics);
-
 	mCleanupThread = cleanupThread;
 }
 
@@ -76,7 +69,7 @@ d912pxy_gpu_cmd_list::~d912pxy_gpu_cmd_list()
 
 void d912pxy_gpu_cmd_list::Execute()
 {	
-	LOG_DBG_DTDM("exec %016llX", this);
+
 
 	for (int i = 0; i != PXY_INNER_MAX_GPU_CMD_LIST_GROUPS; ++i)
 		LOG_ERR_THROW2(mCL[i]->Close(), "can't close command list");
@@ -97,7 +90,7 @@ void d912pxy_gpu_cmd_list::Execute()
 
 void d912pxy_gpu_cmd_list::Wait()
 {
-	LOG_DBG_DTDM("wait %016llX", this);
+
 
 	if (fence->GetCompletedValue() < fenceId)
 	{
@@ -159,7 +152,6 @@ void d912pxy_gpu_cmd_list::CleanupAllReferenced()
 void d912pxy_gpu_cmd_list::CleanupReferenced(UINT items)
 {
 #ifdef FRAME_METRIC_CLEANUPS
-	m_logMetrics->Add(m_cleanupCntMetrics, mGpuRefs->TotalElements());
 #endif
 
 	UINT cleaned = 0;

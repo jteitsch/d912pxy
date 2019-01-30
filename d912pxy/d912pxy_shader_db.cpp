@@ -119,7 +119,7 @@ d912pxy_shader_pair * d912pxy_shader_db::GetPair(d912pxy_vshader* vs, d912pxy_ps
 	//d912pxy_shader_uid pdc[2] = { (UINT64)vs, (UINT64)ps };
 	d912pxy_shader_uid pdc[2] = { vs->GetID(), ps->GetID() };
 
-	LOG_DBG_DTDM2("ShaderPair %016llX %016llX", pdc[0], pdc[1]);
+
 	
  	UINT32 ha = shaderPairs->memHash32(pdc);
 	

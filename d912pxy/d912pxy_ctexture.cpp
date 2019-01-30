@@ -30,7 +30,7 @@ d912pxy_ctexture::d912pxy_ctexture(d912pxy_device* dev, UINT edgeLength, UINT Le
 
 	m_levels = Levels;
 
-	LOG_DBG_DTDM("ctexture w:%u", edgeLength);
+
 
 	if (Usage & D3DUSAGE_RENDERTARGET)
 		LOG_ERR_THROW2(-1, "cubemap rt");// baseSurface = new d912pxy_surface(dev, edgeLength, edgeLength, Format, D3DMULTISAMPLE_NONE, 0, 0, 0);
@@ -81,7 +81,7 @@ D912PXY_METHOD_IMPL_(void, GenerateMipSubLevels)(THIS) { d912pxy_basetexture::Ge
 
 D912PXY_METHOD_IMPL(GetLevelDesc)(THIS_ UINT Level, D3DSURFACE_DESC *pDesc)
 { 
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	*pDesc = baseSurface->GetDX9DescAtLevel(Level);
 	return D3D_OK;
@@ -89,7 +89,7 @@ D912PXY_METHOD_IMPL(GetLevelDesc)(THIS_ UINT Level, D3DSURFACE_DESC *pDesc)
 
 D912PXY_METHOD_IMPL(GetCubeMapSurface)(THIS_ D3DCUBEMAP_FACES FaceType, UINT Level, IDirect3DSurface9** ppCubeMapSurface)
 { 
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	*ppCubeMapSurface = (IDirect3DSurface9*)baseSurface->GetLayer(Level, FaceType);
 	(*ppCubeMapSurface)->AddRef();
@@ -98,7 +98,7 @@ D912PXY_METHOD_IMPL(GetCubeMapSurface)(THIS_ D3DCUBEMAP_FACES FaceType, UINT Lev
 
 D912PXY_METHOD_IMPL(LockRect)(THIS_ D3DCUBEMAP_FACES FaceType, UINT Level, D3DLOCKED_RECT* pLockedRect, CONST RECT* pRect, DWORD Flags)
 { 
-	LOG_DBG_DTDM("LockRect lv %u fc %u", Level, FaceType);
+
 
 
 	baseSurface->GetLayer(Level, FaceType)->LockRect(pLockedRect, pRect, Flags);
@@ -107,7 +107,7 @@ D912PXY_METHOD_IMPL(LockRect)(THIS_ D3DCUBEMAP_FACES FaceType, UINT Level, D3DLO
 
 D912PXY_METHOD_IMPL(UnlockRect)(THIS_ D3DCUBEMAP_FACES FaceType, UINT Level)
 { 
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	baseSurface->GetLayer(Level, FaceType)->UnlockRect();
 	return D3D_OK; 

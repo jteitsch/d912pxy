@@ -34,22 +34,22 @@ d912pxy_texture::d912pxy_texture(d912pxy_device* dev, UINT Width, UINT Height, U
 
 	UINT32 rtTrans;
 
-	LOG_DBG_DTDM("tex usage is %u", Usage);
+
 
 	if (Usage & D3DUSAGE_RENDERTARGET)
 	{		
-		LOG_DBG_DTDM("texture as rendertarget %u", Format);
+	
 		baseSurface = new d912pxy_surface(dev, Width, Height, Format, D3DMULTISAMPLE_NONE, 0, 0, 0);		
 		rtTrans = 1;
 	}
 	else if (Usage & D3DUSAGE_DEPTHSTENCIL)
 	{
-		LOG_DBG_DTDM("texture as depthstencil");
+	
 		baseSurface = new d912pxy_surface(dev, Width, Height, Format, D3DMULTISAMPLE_NONE, 0, 0, 1);
 		rtTrans = 1;
 	}
 	else {
-		LOG_DBG_DTDM("texture as SRV");
+	
 		if (m_levels != 0)
 		{
 			baseSurface = d912pxy_s(pool_surface)->GetSurface(Width, Height, Format, m_levels, 1);
@@ -92,7 +92,7 @@ D912PXY_METHOD_IMPL_(void, GenerateMipSubLevels)(THIS)
 
 D912PXY_METHOD_IMPL(GetLevelDesc)(THIS_ UINT Level, D3DSURFACE_DESC *pDesc)
 { 
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	API_OVERHEAD_TRACK_START(1)
 
@@ -104,7 +104,7 @@ D912PXY_METHOD_IMPL(GetLevelDesc)(THIS_ UINT Level, D3DSURFACE_DESC *pDesc)
 
 D912PXY_METHOD_IMPL(GetSurfaceLevel)(THIS_ UINT Level, IDirect3DSurface9** ppSurfaceLevel)
 { 
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	API_OVERHEAD_TRACK_START(1)
 	
@@ -123,7 +123,7 @@ D912PXY_METHOD_IMPL(GetSurfaceLevel)(THIS_ UINT Level, IDirect3DSurface9** ppSur
 
 D912PXY_METHOD_IMPL(LockRect)(THIS_ UINT Level, D3DLOCKED_RECT* pLockedRect, CONST RECT* pRect, DWORD Flags)
 { 
-	LOG_DBG_DTDM("LockRect lv %u", Level);
+
 
 	API_OVERHEAD_TRACK_START(1)
 
@@ -136,7 +136,7 @@ D912PXY_METHOD_IMPL(LockRect)(THIS_ UINT Level, D3DLOCKED_RECT* pLockedRect, CON
 
 D912PXY_METHOD_IMPL(UnlockRect)(THIS_ UINT Level)
 { 
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	API_OVERHEAD_TRACK_START(1)
 
@@ -149,7 +149,7 @@ D912PXY_METHOD_IMPL(UnlockRect)(THIS_ UINT Level)
 
 D912PXY_METHOD_IMPL(AddDirtyRect)(THIS_ CONST RECT* pDirtyRect)
 { 
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	API_OVERHEAD_TRACK_START(1)
 

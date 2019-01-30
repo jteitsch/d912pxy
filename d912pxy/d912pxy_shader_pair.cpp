@@ -53,7 +53,7 @@ d912pxy_pso_cache_item* d912pxy_shader_pair::GetPSOCacheData(UINT32 idx, d912pxy
 	{
 		intptr_t oldEnd = maxPsoId * sizeof(d912pxy_pso_cache_item*);
 		
-		LOG_DBG_DTDM3("GetPSOCacheData realloc %u => %u", maxPsoId, idx + 100);
+	
 
 		intptr_t extendSize = ((idx - maxPsoId) + 100) * sizeof(d912pxy_pso_cache_item*);
 

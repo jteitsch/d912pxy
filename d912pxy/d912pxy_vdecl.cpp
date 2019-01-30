@@ -152,9 +152,6 @@ d912pxy_vdecl::d912pxy_vdecl(d912pxy_device * dev, const D3DVERTEXELEMENT9 * dat
 		declData12[i].InstanceDataStepRate = 0;
 		//doubt are here
 		declData12[i].AlignedByteOffset = data[i].Offset;
-
-		LOG_DBG_DTDM("vd %S => %u = %04hX|%04hX|%02hhX|%02hhX|%02hhX|%02hhX", 
-			semantics[i].s, i, data[i].Stream, data[i].Offset, data[i].Type, data[i].Method, data[i].Usage, data[i].UsageIndex);
 	}
 
 }

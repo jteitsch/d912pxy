@@ -42,7 +42,7 @@ D912PXY_METHOD_IMPL(GetDevice)(THIS_ IDirect3DDevice9** ppDevice) { *ppDevice = 
 D912PXY_METHOD_IMPL(Capture)(THIS)
 {
 	//megai2: must save write in all states tagged to this block
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	return D3D_OK;
 }
@@ -50,7 +50,7 @@ D912PXY_METHOD_IMPL(Capture)(THIS)
 D912PXY_METHOD_IMPL(Apply)(THIS)
 {
 	//megai2: must apply all tagged states from this block
-	LOG_DBG_DTDM(__FUNCTION__);
+
 
 	return D3D_OK;
 }

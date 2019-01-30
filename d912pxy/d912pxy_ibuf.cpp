@@ -63,7 +63,7 @@ D912PXY_METHOD_IMPL_(D3DRESOURCETYPE, GetType)(THIS) { return base->GetType(); }
 
 D912PXY_METHOD_IMPL(Lock)(THIS_ UINT OffsetToLock, UINT SizeToLock, void** ppbData, DWORD Flags)
 {
-//	LOG_DBG_DTDM("Lock %u %u %u", OffsetToLock, SizeToLock, Flags);
+//
 
 	base->Lock(OffsetToLock, SizeToLock, ppbData, Flags);
 
@@ -72,7 +72,7 @@ D912PXY_METHOD_IMPL(Lock)(THIS_ UINT OffsetToLock, UINT SizeToLock, void** ppbDa
 
 D912PXY_METHOD_IMPL(Unlock)(THIS)
 {
-//	LOG_DBG_DTDM(__FUNCTION__);
+//
 
 	base->Unlock();
 
@@ -81,7 +81,7 @@ D912PXY_METHOD_IMPL(Unlock)(THIS)
 
 D912PXY_METHOD_IMPL(GetDesc)(THIS_ D3DINDEXBUFFER_DESC *pDesc)
 {
-//	LOG_DBG_DTDM(__FUNCTION__);
+//
 
 	return D3DERR_INVALIDCALL;
 }

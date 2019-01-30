@@ -237,7 +237,7 @@ D912PXY_REPLAY_HA_IMPL(void, RSSR, d912pxy_replay_rs_viewscissor)
 
 D912PXY_REPLAY_HA_IMPL(void, DIIP, d912pxy_replay_draw_indexed_instanced)
 {
-	//LOG_DBG_DTDM2("DIIP SIL %u ICPI %u IC %u SI %u BV %u", it->dip.StartInstanceLocation, it->dip.IndexCountPerInstance, it->dip.InstanceCount, it->dip.StartIndexLocation, it->dip.BaseVertexLocation);
+	//
 
 	d912pxy_s(batch)->PreDIP(cl, it->StartInstanceLocation);
 
@@ -436,13 +436,13 @@ void d912pxy_replay::Replay(UINT start, UINT end, d912pxy_gpu_cmd_list_group lis
 
 	ID3D12PipelineState* psoPtr = NULL;
 
-	LOG_DBG_DTDM("replay range [%u , %u, %u]", start, end, stackTop);
+
 
 	d912pxy_s(iframe)->SetRSigOnList(listGrp);	
 
 	for (UINT i = start; i != end; ++i)
 	{
-		LOG_DBG_DTDM("RP TY %s", d912pxy_replay_item_type_dsc[stack[i].type]);
+	
 
 		if (i >= stackTop)
 		{

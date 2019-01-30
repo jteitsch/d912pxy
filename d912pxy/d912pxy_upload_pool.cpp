@@ -48,7 +48,7 @@ d912pxy_upload_pool::~d912pxy_upload_pool()
 			++tsz;
 		}
 
-		LOG_DBG_DTDM3("ul pool tbl[%u] = %u", i, tsz);
+	
 
 		delete memTable[i];		
 	}
@@ -66,7 +66,7 @@ d912pxy_upload_item * d912pxy_upload_pool::GetUploadObject(UINT size)
 		PoolRW(mc, &ret, 1);
 	}
 	else {
-		LOG_DBG_DTDM2("upload obj reuse %u-%u", mc, size);
+	
 		ret->PooledAction(1);			
 	}
 

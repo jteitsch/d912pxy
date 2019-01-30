@@ -44,14 +44,14 @@ d912pxy_comhandler::~d912pxy_comhandler()
 HRESULT d912pxy_comhandler::QueryInterface(REFIID riid, void ** ppvObj)
 {
 
-	LOG_DBG_DTDM("::CQI");
+
 	*ppvObj = this;
 	return NOERROR;
 }
 
 ULONG d912pxy_comhandler::AddRef()
 {
-	LOG_DBG_DTDM("::CAR");
+
 
 	return InterlockedAdd(&refc, 1);
 }
@@ -62,7 +62,7 @@ ULONG d912pxy_comhandler::Release()
 
 	if (decR == 0)
 	{
-		LOG_DBG_DTDM("::CRE 0 %016llX", this);
+	
 
 		if (m_dev)
 			m_dev->IFrameCleanupEnqeue(this);

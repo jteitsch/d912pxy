@@ -207,24 +207,10 @@ private:
 	D3DDISPLAYMODE cached_dx9displaymode;
 	D3DCAPS9 cached_dx9caps;
 
-	//telemetry log
-
-	IP7_Telemetry* m_logMetrics;
-	tUINT8 metricIFrameReplayTime;
-	tUINT8 metricIFramePrep;
-	tUINT8 metricIFrameExec;
-	tUINT8 metricIFrameDraws;
-	tUINT8 metricIFrameSync;
-
 	Stopwatch* iframePrepTime;
 	Stopwatch* iframeReplTime;
 	Stopwatch* iframeExecTime;
 	Stopwatch* iframeSyncTime;
-	
-	tUINT8 metricIFramePrepPerBatch;
-	tUINT8 metricIFrameAppCPU;
-	tUINT8 metricIFrameAPIOverhead;
-	tUINT8 metricIFrameOverheadPerBatch;
 
 #ifdef TRACK_SHADER_BUGS_PROFILE
 	D3DFORMAT stageFormatsTrack[1024];

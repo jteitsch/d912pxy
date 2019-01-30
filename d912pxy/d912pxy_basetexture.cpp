@@ -56,36 +56,36 @@ D912PXY_METHOD_IMPL_(D3DRESOURCETYPE, GetType)(THIS) { return d912pxy_resource::
 
 D912PXY_METHOD_IMPL_(DWORD, SetLOD)(DWORD LODNew)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return D3D_OK;
 }
 D912PXY_METHOD_IMPL_(DWORD, GetLOD)()
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return 0;
 }
 
 D912PXY_METHOD_IMPL_(DWORD, GetLevelCount)()
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return 1;
 }
 
 D912PXY_METHOD_IMPL(SetAutoGenFilterType)(D3DTEXTUREFILTERTYPE FilterType)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return D3D_OK;
 }
 
 D912PXY_METHOD_IMPL_(D3DTEXTUREFILTERTYPE, GetAutoGenFilterType)()
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return D3DTEXF_POINT;
 }
 
 D912PXY_METHOD_IMPL_(void, GenerateMipSubLevels)()
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return;
 }
 

@@ -65,42 +65,42 @@ HRESULT d912pxy_resource::GetDevice(IDirect3DDevice9 ** ppDevice)
 
 HRESULT d912pxy_resource::SetPrivateData(REFGUID refguid, CONST void * pData, DWORD SizeOfData, DWORD Flags)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return E_NOTIMPL;
 }
 
 HRESULT d912pxy_resource::GetPrivateData(REFGUID refguid, void * pData, DWORD * pSizeOfData)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return E_NOTIMPL;
 }
 
 HRESULT d912pxy_resource::FreePrivateData(REFGUID refguid)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return E_NOTIMPL;
 }
 
 DWORD d912pxy_resource::SetPriority(DWORD PriorityNew)
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return D3D_OK;
 }
 
 DWORD d912pxy_resource::GetPriority()
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return 0;
 }
 
 void d912pxy_resource::PreLoad()
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 }
 
 D3DRESOURCETYPE d912pxy_resource::GetType()
 {
-	LOG_DBG_DTDM(__FUNCTION__);
+
 	return D3DRTYPE_SURFACE;
 }
 
@@ -168,7 +168,7 @@ HRESULT d912pxy_resource::d12res_tex2d(UINT width, UINT height, DXGI_FORMAT fmt,
 		IID_PPV_ARGS(&m_res)
 	) != S_OK)
 	{
-		m_log->P7_ERROR(LGC_DEFAULT, TM("d12res_tex2d w %u h %u arsz %u lvls %u fmt %u"), width, height, arrSz, *levels, fmt);
+		
 		LOG_ERR_THROW2(-1, "texture object create failed");
 	}
 
@@ -176,7 +176,7 @@ HRESULT d912pxy_resource::d12res_tex2d(UINT width, UINT height, DXGI_FORMAT fmt,
 
 	stateCache = D3D12_RESOURCE_STATE_COMMON;
 
-	LOG_DBG_DTDM("mip levels after miplevels = 0 => %u", m_res->GetDesc().MipLevels);
+
 
 	*levels = m_res->GetDesc().MipLevels;
 
@@ -298,7 +298,7 @@ void d912pxy_resource::IFrameBarrierTrans(UINT subres, D3D12_RESOURCE_STATES to,
 	bar.Transition.Subresource = subres;
 	bar.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 
-	LOG_DBG_DTDM("dbarrier %016llX to %u from %u", m_res.Get(), to, stateCache);
+
 
 	stateCache = to;	
 
@@ -316,14 +316,14 @@ void d912pxy_resource::IFrameBarrierTrans2(UINT subres, D3D12_RESOURCE_STATES to
 	bar.Transition.Subresource = subres;
 	bar.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 
-	LOG_DBG_DTDM("rbarrier %016llX to %u from %u", m_res.Get(), to, from);
+
 
 	cl->ResourceBarrier(1, &bar);	
 }
 
 void d912pxy_resource::IFrameTrans(D3D12_RESOURCE_STATES to)
 {
-	LOG_DBG_DTDM("abarrier %016llX to %u from %u", m_res.Get(), to, stateCache);
+
 	stateCache = to;
 }
 

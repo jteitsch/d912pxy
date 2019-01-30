@@ -78,9 +78,6 @@ private:
 	D3D12_GPU_DESCRIPTOR_HANDLE gpuBase;
 
 	D3D12_DESCRIPTOR_HEAP_DESC* m_desc;
-	
-	IP7_Telemetry* m_logMetrics;
-	tUINT8 slotMetrics;
 
 	D3D12_GPU_DESCRIPTOR_HANDLE heapStartCache;
 };
